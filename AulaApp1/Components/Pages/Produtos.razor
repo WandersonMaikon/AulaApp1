@@ -1,0 +1,33 @@
+﻿@page "/produtos"
+
+<h3 class="mb-4">Produtos</h3>
+<div class="row">
+<input @bind="nome" />
+<input type="number" @bind="preco" />
+<input type="number" @bind="quantidade" />
+<button class="btn btn-primary" @onclick="AdicionarProduto">Adicionar produto</button>
+<ul>
+	@foreach (var p in produtos)
+	{
+		<li>@p.Nome: R$@p.Preco</li>
+	}
+</ul>
+</div>
+@code {
+	private string nome = "";
+	private decimal preco;
+	private int quantidade;
+
+	private List<Produto> produtos = new();
+
+	private void AdicionarProduto()
+	{
+		produtos.Add(new Produto
+		{
+			Nome = nome,
+			Preco = preco
+		});
+		nome = "";
+		preco = 0;
+	}
+}
